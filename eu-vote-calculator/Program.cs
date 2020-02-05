@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace eu_vote_calculator
 {
@@ -10,9 +11,14 @@ namespace eu_vote_calculator
     {
         static void Main(string[] args)
         {
-            Country Belgium = new Country("Belgium", 0.75);
-            Console.WriteLine(Belgium.PopulationPercentage);
-            Console.ReadKey();
+            List < Country > countryList = new List<Country>();
+            string[] textFile = File.ReadAllLines(@"C:\Users\Brandon\source\repos\eu-vote-calculator\eu-vote-calculator\CountryList.txt");
+            for (int i = 0; i < textFile.Length; i++)
+            {
+                string[] splitText = textFile[i].Split(',');
+                Country countryObject = new Country(splitText[0], double.Parse(splitText[1]));
+                countryList.Add(countryObject);
+            }
         }
     }
 }
