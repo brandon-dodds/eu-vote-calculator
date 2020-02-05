@@ -9,7 +9,7 @@ namespace eu_vote_calculator
         static void Main(string[] args)
         {
             List < Country > countryList = new List<Country>();
-            string[] textFile = File.ReadAllLines(@"C:\Users\Brandon\source\repos\eu-vote-calculator\eu-vote-calculator\CountryList.txt");
+            string[] textFile = File.ReadAllLines("CountryList.txt");
             for (int i = 0; i < textFile.Length; i++)
             {
                 string[] splitText = textFile[i].Split(',');
