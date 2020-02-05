@@ -19,6 +19,11 @@ namespace eu_vote_calculator
                 Country countryObject = new Country(splitText[0], double.Parse(splitText[1]));
                 countryList.Add(countryObject);
             }
+            for(int i = 0; i < countryList.Count; i++)
+            {
+                Console.WriteLine("{0}, {1}",countryList[i].CountryName, countryList[i].PopulationPercentage.ToString());
+            }
+            Console.ReadKey();
         }
     }
 }
