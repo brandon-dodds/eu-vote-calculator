@@ -10,7 +10,9 @@ namespace eu_vote_calculator
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello world!");
+            Country Belgium = new Country("Belgium", 0.75);
+            Console.WriteLine(Belgium.PopulationPercentage);
+            Console.ReadKey();
         }
     }
 }
