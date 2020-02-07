@@ -10,6 +10,7 @@ namespace eu_vote_calculator
     {
         public string CountryName { get; set; }
         public double PopulationPercentage { get; set; }
+        public int VoteChoice { get; set; }
 
         public Country(string CountryName, double PopulationPercentage)
         {
