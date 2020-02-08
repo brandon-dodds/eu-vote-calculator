@@ -16,7 +16,7 @@ namespace eu_vote_calculator
             Abstain
         }
 
-        public static void countryVotes(List<Country> x)
+        public static void CountryVotes(List<Country> x)
         {
             foreach (var item in x)
             {

@@ -19,7 +19,7 @@ namespace eu_vote_calculator
                 Country countryObject = new Country(splitText[0], double.Parse(splitText[1]));
                 countryList.Add(countryObject);
             }
-            VoteCalc.countryVotes(countryList);
+            VoteCalc.CountryVotes(countryList);
             Console.ReadKey();
         }
     }
