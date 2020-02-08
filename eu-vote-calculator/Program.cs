@@ -10,9 +10,10 @@ namespace eu_vote_calculator
         {
 
             //All this does is creates a list of country objects from the file given.
-
+            
             List < Country > countryList = new List<Country>();
             string[] textFile = File.ReadAllLines("CountryList.txt");
+
             for (int i = 0; i < textFile.Length; i++)
             {
                 string[] splitText = textFile[i].Split(',');

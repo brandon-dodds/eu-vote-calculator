@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace eu_vote_calculator
 {
@@ -50,7 +51,7 @@ namespace eu_vote_calculator
             /* This is what is known as a LINQ Query! It's cool as it allows us to use an SQL like system to figure
              * who voted yes or not. We can use this to get a percentage for the vote mechanics! */
 
-            var yesVotes =
+            IEnumerable<Country> yesVotes =
                 from countries in x
                 where countries.VoteChoice == 1
                 select countries;
