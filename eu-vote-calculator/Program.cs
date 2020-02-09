@@ -6,28 +6,14 @@ namespace eu_vote_calculator
 {
     class Program
     {
-        static void Main(string[] args)
+        static void TakeVotes(VoteCalc voteCalculator, List<Country> countryList)
         {
-
-            //All this does is creates a list of country objects from the file given.
-            
-            List < Country > countryList = new List<Country>();
-            string[] textFile = File.ReadAllLines("CountryList.txt");
-
-            for (int i = 0; i < textFile.Length; i++)
-            {
-                string[] splitText = textFile[i].Split(',');
-                Country countryObject = new Country(splitText[0], double.Parse(splitText[1]));
-                countryList.Add(countryObject);
-            }
-
-            /* This then takes all the countries and takes their votes. */
-            VoteCalc voteCalculator = new VoteCalc(countryList);
             foreach (var item in countryList)
             {
                 voteCalculator.Countries = countryList;
                 Console.Clear();
-                Console.WriteLine("{0} Countries have voted yes out of {1}", voteCalculator.AmountOfYesVotes(), voteCalculator.Countries.Count);
+                Console.WriteLine("{0} Countries have voted yes out of {1}.", voteCalculator.AmountOfYesVotes(), voteCalculator.Countries.Count);
+                Console.WriteLine("{0}% of the population have voted yes.", voteCalculator.AmountOfYesPopulation());
                 Console.WriteLine("Country: {0}. \nEnter (Y)es, (N)o or (A)bstain.", item.CountryName);
                 string input = Console.ReadLine().ToLower().Trim();
                 switch (input)
@@ -48,6 +34,26 @@ namespace eu_vote_calculator
                 }
             }
             Console.ReadKey();
+        }
+        static void Main(string[] args)
+        {
+
+            //All this does is creates a list of country objects from the file given.
+            
+            List < Country > countryList = new List<Country>();
+            string[] textFile = File.ReadAllLines("CountryList.txt");
+
+            for (int i = 0; i < textFile.Length; i++)
+            {
+                string[] splitText = textFile[i].Split(',');
+                Country countryObject = new Country(splitText[0], double.Parse(splitText[1]));
+                countryList.Add(countryObject);
+            }
+
+            /* This then takes all the countries and takes their votes. */
+            VoteCalc voteCalculator = new VoteCalc(countryList);
+            TakeVotes(voteCalculator, countryList);
+            
         }
     }
 }

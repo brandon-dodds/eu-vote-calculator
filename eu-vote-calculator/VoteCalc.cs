@@ -31,6 +31,22 @@ namespace eu_vote_calculator
             return yesVotes.Count();
         }
 
+        public double AmountOfYesPopulation()
+        {
+            double population = 0;
+            IEnumerable<Country> yesVotes =
+                from countries in Countries
+                where countries.VoteChoice == 1
+                select countries;
+
+            foreach(var country in yesVotes)
+            {
+                population += country.PopulationPercentage;
+            }
+
+            return population;
+        }
+
         public VoteCalc(List<Country> countries)
         {
             Countries = countries;
