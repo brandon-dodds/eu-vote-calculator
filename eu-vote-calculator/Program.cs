@@ -46,7 +46,6 @@ namespace eu_vote_calculator
                         Console.ReadKey();
                         break;
                 }
-                Console.Clear();
             }
             Console.ReadKey();
         }
