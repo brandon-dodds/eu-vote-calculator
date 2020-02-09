@@ -21,8 +21,33 @@ namespace eu_vote_calculator
                 countryList.Add(countryObject);
             }
 
-            VoteCalc.CountryVotes(countryList);
-            VoteCalc.ShowVotes(countryList);
+            /* This then takes all the countries and takes their votes. */
+            VoteCalc voteCalculator = new VoteCalc(countryList);
+            foreach (var item in countryList)
+            {
+                voteCalculator.Countries = countryList;
+                Console.Clear();
+                Console.WriteLine("{0} Countries have voted yes out of {1}", voteCalculator.AmountOfYesVotes(), voteCalculator.Countries.Count);
+                Console.WriteLine("Country: {0}. \nEnter (Y)es, (N)o or (A)bstain.", item.CountryName);
+                string input = Console.ReadLine().ToLower().Trim();
+                switch (input)
+                {
+                    case "y":
+                        item.VoteChoice = (int)VoteCalc.VoteChoice.Yes;
+                        break;
+                    case "n":
+                        item.VoteChoice = (int)VoteCalc.VoteChoice.No;
+                        break;
+                    case "a":
+                        item.VoteChoice = (int)VoteCalc.VoteChoice.Abstain;
+                        break;
+                    default:
+                        Console.WriteLine("Choosing Abstain by default, press any key.");
+                        Console.ReadKey();
+                        break;
+                }
+                Console.Clear();
+            }
             Console.ReadKey();
         }
     }
