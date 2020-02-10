@@ -31,8 +31,7 @@ namespace eu_vote_calculator
                 {
                     Console.WriteLine("[{0}] {1}: {2}", i, voteCalc.Countries[i].CountryName, (VoteCalc.VoteChoice)voteCalc.Countries[i].VoteChoice);
                 }
-                int intUserCountry;
-                bool tryParseIntCountry = int.TryParse(Console.ReadLine(), out intUserCountry);
+                bool tryParseIntCountry = int.TryParse(Console.ReadLine(), out int intUserCountry);
                 if (tryParseIntCountry)
                 {
                     Console.Clear();
