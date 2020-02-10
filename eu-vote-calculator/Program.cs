@@ -6,35 +6,6 @@ namespace eu_vote_calculator
 {
     class Program
     {
-        static void TakeVotes(VoteCalc voteCalculator, List<Country> countryList)
-        {
-            foreach (var item in countryList)
-            {
-                voteCalculator.Countries = countryList;
-                Console.Clear();
-                Console.WriteLine("{0} Countries have voted yes out of {1}.", voteCalculator.AmountOfYesVotes(), voteCalculator.Countries.Count);
-                Console.WriteLine("{0}% of the population have voted yes.", voteCalculator.AmountOfYesPopulation());
-                Console.WriteLine("Country: {0}. \nEnter (Y)es, (N)o or (A)bstain.", item.CountryName);
-                string input = Console.ReadLine().ToLower().Trim();
-                switch (input)
-                {
-                    case "y":
-                        item.VoteChoice = (int)VoteCalc.VoteChoice.Yes;
-                        break;
-                    case "n":
-                        item.VoteChoice = (int)VoteCalc.VoteChoice.No;
-                        break;
-                    case "a":
-                        item.VoteChoice = (int)VoteCalc.VoteChoice.Abstain;
-                        break;
-                    default:
-                        Console.WriteLine("Choosing Abstain by default, press any key.");
-                        Console.ReadKey();
-                        break;
-                }
-            }
-            Console.ReadKey();
-        }
         static void Main(string[] args)
         {
 
@@ -49,11 +20,44 @@ namespace eu_vote_calculator
                 Country countryObject = new Country(splitText[0], double.Parse(splitText[1]));
                 countryList.Add(countryObject);
             }
-
-            /* This then takes all the countries and takes their votes. */
-            VoteCalc voteCalculator = new VoteCalc(countryList);
-            TakeVotes(voteCalculator, countryList);
-            
+            while (true)
+            {
+                Console.Clear();
+                VoteCalc voteCalc = new VoteCalc(countryList);
+                Console.WriteLine("{0} Countries out of {1} have voted yes.",voteCalc.AmountOfYesVotes(), voteCalc.Countries.Count);
+                Console.WriteLine("{0}% Percent of the population voted yes.", voteCalc.AmountOfYesPopulation());
+                Console.WriteLine("Please select a country");
+                for (int i = 0; i < voteCalc.Countries.Count; i++)
+                {
+                    Console.WriteLine("[{0}] {1}: {2}", i, voteCalc.Countries[i].CountryName, (VoteCalc.VoteChoice)voteCalc.Countries[i].VoteChoice);
+                }
+                int intUserCountry;
+                bool tryParseIntCountry = int.TryParse(Console.ReadLine(), out intUserCountry);
+                if (tryParseIntCountry)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Changing vote for {0}", voteCalc.Countries[intUserCountry].CountryName);
+                    Console.WriteLine("Choose (Y)es, (N)o or (A)bstain.");
+                    var userChoice = Console.ReadLine();
+                    switch (userChoice.Trim().ToLower())
+                    {
+                        case "y":
+                            countryList[intUserCountry].VoteChoice = (int)VoteCalc.VoteChoice.Yes;
+                            break;
+                        case "n":
+                            countryList[intUserCountry].VoteChoice = (int)VoteCalc.VoteChoice.No;
+                            break;
+                        case "a":
+                            countryList[intUserCountry].VoteChoice = (int)VoteCalc.VoteChoice.Abstain;
+                            break;
+                        default:
+                            Console.WriteLine("Abstaining by default.");
+                            Console.ReadKey();
+                            countryList[intUserCountry].VoteChoice = (int)VoteCalc.VoteChoice.Abstain;
+                            break;
+                    }
+                }
+            }
         }
     }
 }
