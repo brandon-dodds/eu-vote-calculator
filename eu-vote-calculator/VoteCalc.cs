@@ -13,9 +13,7 @@ namespace eu_vote_calculator
 
         public enum VoteChoice
         {
-            Abstain,
-            Yes,
-            No,
+            Abstain, Yes, No
         }
 
         public int AmountOfYesVotes()
