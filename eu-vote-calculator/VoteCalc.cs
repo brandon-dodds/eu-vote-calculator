@@ -39,9 +39,10 @@ namespace eu_vote_calculator
                 where countries.VoteChoice == 1
                 select countries;
 
-            foreach (Country country in yesVotes)
+            for (int i = 0; i < yesVotes.Count(); i++)
             {
-                population += country.PopulationPercentage;
+                population += yesVotes.ElementAt(i).PopulationPercentage;
+
             }
 
             return population;
