@@ -48,6 +48,28 @@ namespace eu_vote_calculator
             return population;
         }
 
+        public bool QualifiedMajority()
+        {
+            double population = 0;
+            IEnumerable<Country> yesVotes =
+                from countries in Countries
+                where countries.VoteChoice == 1
+                select countries;
+
+            for (int i = 0; i < yesVotes.Count(); i++)
+            {
+                population += yesVotes.ElementAt(i).PopulationPercentage;
+
+            }
+
+            if(yesVotes.Count() > 0.55 * Countries.Count | population > 65)
+            {
+                return true;
+            }
+            return false;
+
+        }
+
         public VoteCalc(List<Country> countries)
         {
             Countries = countries;

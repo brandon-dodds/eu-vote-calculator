@@ -26,6 +26,7 @@ namespace eu_vote_calculator
                 VoteCalc voteCalc = new VoteCalc(countryList);
                 Console.WriteLine("{0} Countries out of {1} have voted yes.", voteCalc.AmountOfYesVotes(), voteCalc.Countries.Count);
                 Console.WriteLine("{0}% Percent of the population voted yes.", voteCalc.AmountOfYesPopulation());
+                Console.WriteLine("Has Qualified Majority passed?: {0}", voteCalc.QualifiedMajority());
                 Console.WriteLine("Please select a country");
                 for (int i = 0; i < voteCalc.Countries.Count; i++)
                 {
