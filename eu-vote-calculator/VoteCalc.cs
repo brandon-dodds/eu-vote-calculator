@@ -11,10 +11,7 @@ namespace eu_vote_calculator
         public IEnumerable<Country> yesVotes;
         public List<Country> Countries
         {
-            get
-            {
-                return countries;
-            }
+            get => countries;
             set
             {
                 countries = value;
@@ -32,23 +29,14 @@ namespace eu_vote_calculator
             Abstain, Yes, No
         }
 
-        public int AmountOfYesVotes()
-        {
-            /* This is what is known as a LINQ Query! It's cool as it allows us to use an SQL like system to figure
-             * who voted yes or not. We can use this to get a percentage for the vote mechanics! */
-
-            return yesVotes.Count();
-        }
+        public int AmountOfYesVotes() => yesVotes.Count();
 
         public double AmountOfYesPopulation()
         {
             double population = 0;
 
             for (int i = 0; i < yesVotes.Count(); i++)
-            {
                 population += yesVotes.ElementAt(i).PopulationPercentage;
-
-            }
 
             return population;
         }
@@ -58,22 +46,13 @@ namespace eu_vote_calculator
             double population = 0;
 
             for (int i = 0; i < yesVotes.Count(); i++)
-            {
                 population += yesVotes.ElementAt(i).PopulationPercentage;
 
-            }
-
             if(yesVotes.Count() > 0.55 * Countries.Count | population > 65)
-            {
                 return true;
-            }
             return false;
-
         }
 
-        public VoteCalc(List<Country> countries)
-        {
-            Countries = countries;
-        }
+        public VoteCalc(List<Country> countries) => Countries = countries;
     }
 }
