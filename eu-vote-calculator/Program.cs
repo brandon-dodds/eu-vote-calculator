@@ -10,8 +10,8 @@ namespace eu_vote_calculator
         {
 
             //All this does is creates a list of country objects from the file given.
-            
-            List < Country > countryList = new List<Country>();
+
+            List<Country> countryList = new List<Country>();
             string[] textFile = File.ReadAllLines("CountryList.txt");
 
             for (int i = 0; i < textFile.Length; i++)
@@ -24,7 +24,7 @@ namespace eu_vote_calculator
             {
                 Console.Clear();
                 VoteCalc voteCalc = new VoteCalc(countryList);
-                Console.WriteLine("{0} Countries out of {1} have voted yes.",voteCalc.AmountOfYesVotes(), voteCalc.Countries.Count);
+                Console.WriteLine("{0} Countries out of {1} have voted yes.", voteCalc.AmountOfYesVotes(), voteCalc.Countries.Count);
                 Console.WriteLine("{0}% Percent of the population voted yes.", voteCalc.AmountOfYesPopulation());
                 Console.WriteLine("Please select a country");
                 for (int i = 0; i < voteCalc.Countries.Count; i++)
