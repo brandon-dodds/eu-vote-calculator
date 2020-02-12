@@ -37,9 +37,8 @@ namespace eu_vote_calculator
                 Console.WriteLine("Has Qualified Majority passed?: {0}", voteCalc.QualifiedMajority());
                 Console.WriteLine("Please select a country");
                 for (int i = 0; i < voteCalc.Countries.Count; i++)
-                {
                     Console.WriteLine("[{0}] {1}: {2}", i, voteCalc.Countries[i].CountryName, (VoteCalc.VoteChoice)voteCalc.Countries[i].VoteChoice);
-                }
+
                 bool tryParseIntCountry = int.TryParse(Console.ReadLine(), out int intUserCountry);
                 if (tryParseIntCountry)
                 {
