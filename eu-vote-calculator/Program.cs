@@ -17,8 +17,16 @@ namespace eu_vote_calculator
             for (int i = 0; i < textFile.Length; i++)
             {
                 string[] splitText = textFile[i].Split(',');
-                Country countryObject = new Country(splitText[0], double.Parse(splitText[1]));
-                countryList.Add(countryObject);
+                if (double.TryParse(splitText[1], out double population))
+                {
+                    Country countryObject = new Country(splitText[0], population);
+                    countryList.Add(countryObject);
+                }
+                else
+                {
+                    Console.WriteLine("{0} has an invalid population. Skipping...", splitText[0]);
+                    Console.ReadKey();
+                }
             }
             while (true)
             {

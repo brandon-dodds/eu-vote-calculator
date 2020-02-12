@@ -1,4 +1,4 @@
-﻿Austria,1.98
+﻿Austria,1.9-
 Belgium,2.56
 Bulgaria,1.56
 Croatia,0.91
