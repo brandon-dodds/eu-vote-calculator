@@ -24,7 +24,7 @@ namespace eu_vote_calculator
                 }
                 else
                 {
-                    Console.WriteLine("{0} has an invalid population. Skipping...", splitText[0]);
+                    Console.WriteLine($"{splitText[0]} has an invalid population. Skipping...");
                     Console.ReadKey();
                 }
             }
@@ -32,18 +32,18 @@ namespace eu_vote_calculator
             {
                 Console.Clear();
                 VoteCalc voteCalc = new VoteCalc(countryList);
-                Console.WriteLine("{0} Countries out of {1} have voted yes.", voteCalc.AmountOfYesVotes(), voteCalc.Countries.Count);
-                Console.WriteLine("{0}% Percent of the population voted yes.", voteCalc.AmountOfYesPopulation());
-                Console.WriteLine("Has Qualified Majority passed?: {0}", voteCalc.QualifiedMajority());
-                Console.WriteLine("Please select a country");
+                Console.WriteLine($"{voteCalc.AmountOfYesVotes()} Countries out of {voteCalc.Countries.Count} have voted yes.\n" +
+                    $"{voteCalc.AmountOfYesPopulation()}% Percent of the population voted yes.\n" +
+                    $"Has Qualified Majority passed?: {voteCalc.QualifiedMajority()}\n" +
+                    $"Please select a country");
                 for (int i = 0; i < voteCalc.Countries.Count; i++)
-                    Console.WriteLine("[{0}] {1}: {2}", i, voteCalc.Countries[i].CountryName, (VoteCalc.VoteChoice)voteCalc.Countries[i].VoteChoice);
+                    Console.WriteLine($"[{i}] {voteCalc.Countries[i].CountryName}: {(VoteCalc.VoteChoice)voteCalc.Countries[i].VoteChoice}");
 
                 bool tryParseIntCountry = int.TryParse(Console.ReadLine(), out int intUserCountry);
                 if (tryParseIntCountry)
                 {
                     Console.Clear();
-                    Console.WriteLine("Changing vote for {0}", voteCalc.Countries[intUserCountry].CountryName);
+                    Console.WriteLine($"Changing vote for {voteCalc.Countries[intUserCountry].CountryName}");
                     Console.WriteLine("Choose (Y)es, (N)o or (A)bstain.");
                     var userChoice = Console.ReadLine();
                     switch (userChoice.Trim().ToLower())
