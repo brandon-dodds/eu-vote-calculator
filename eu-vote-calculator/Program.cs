@@ -32,9 +32,13 @@ namespace eu_vote_calculator
             {
                 Console.Clear();
                 VoteCalc voteCalc = new VoteCalc(countryList);
+                Console.WriteLine($"EU Voting Calculator");
                 Console.WriteLine($"{voteCalc.AmountOfYesVotes()} Countries out of {voteCalc.Countries.Count} have voted yes.\n" +
-                    $"{voteCalc.AmountOfYesPopulation()}% Percent of the population voted yes.\n" +
+                    $"{Math.Round(voteCalc.AmountOfYesPopulation(),0)}% Percent of the population voted yes.\n" + 
                     $"Has Qualified Majority passed?: {voteCalc.QualifiedMajority()}\n" +
+                    $"Has Unanimity?: {voteCalc.Unanimity()}\n" +
+                    $"Has Simple Majority?: {voteCalc.SimpleMajority()}\n"+
+                    $"Has Reinforced Qualified Majority?: {voteCalc.ReinforcedQualifiedMajority()}\n" +
                     $"Please select a country");
                 for (int i = 0; i < voteCalc.Countries.Count; i++)
                     Console.WriteLine($"[{i}] {voteCalc.Countries[i].CountryName}: {(VoteCalc.VoteChoice)voteCalc.Countries[i].VoteChoice}");
@@ -44,7 +48,7 @@ namespace eu_vote_calculator
                 {
                     Console.Clear();
                     Console.WriteLine($"Changing vote for {voteCalc.Countries[intUserCountry].CountryName}");
-                    Console.WriteLine("Choose (Y)es, (N)o or (A)bstain.");
+                    Console.WriteLine("Choose (Y)es, (N)o, (A)bstain or (P)articipation");
                     var userChoice = Console.ReadLine();
                     switch (userChoice.Trim().ToLower())
                     {
@@ -56,6 +60,9 @@ namespace eu_vote_calculator
                             break;
                         case "a":
                             countryList[intUserCountry].VoteChoice = (int)VoteCalc.VoteChoice.Abstain;
+                            break;
+                        case "p":
+                            countryList[intUserCountry].VoteChoice = (int)VoteCalc.VoteChoice.Participation;
                             break;
                         default:
                             Console.WriteLine("Abstaining by default.");

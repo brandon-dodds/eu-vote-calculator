@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace eu_vote_calculator
 {
@@ -8,7 +9,7 @@ namespace eu_vote_calculator
     class VoteCalc
     {
         private List<Country> countries;
-        public IEnumerable<Country> yesVotes;
+        public IEnumerable<Country> yesVotes, participationVotes;
         public List<Country> Countries
         {
             get => countries;
@@ -16,7 +17,10 @@ namespace eu_vote_calculator
             {
                 countries = value;
                 yesVotes = from countries in Countries
-                           where countries.VoteChoice == 1
+                           where countries.VoteChoice == 0
+                           select countries;
+                participationVotes = from countries in Countries
+                           where countries.VoteChoice == 3
                            select countries;
 
             }
@@ -26,7 +30,7 @@ namespace eu_vote_calculator
 
         public enum VoteChoice
         {
-            Abstain, Yes, No
+            Yes, Abstain, No, Participation
         }
 
         public int AmountOfYesVotes() => yesVotes.Count();
@@ -48,10 +52,38 @@ namespace eu_vote_calculator
             for (int i = 0; i < yesVotes.Count(); i++)
                 population += yesVotes.ElementAt(i).PopulationPercentage;
 
-            if(yesVotes.Count() > 0.55 * Countries.Count | population > 65)
+            if(yesVotes.Count() > 0.55 * Countries.Count && population > 65)
                 return true;
             return false;
         }
+
+        public bool ReinforcedQualifiedMajority()
+        {
+            if (Math.Round((double)yesVotes.Count() / (Countries.Count() - participationVotes.Count()),2) >= 0.65)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool SimpleMajority()
+        {
+            if (yesVotes.Count() >= 0.5*(Countries.Count - participationVotes.Count()))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool Unanimity()
+        {
+            if (yesVotes.Count() == Countries.Count -  participationVotes.Count())
+            {
+                return true;
+            }
+            return false;
+        }
+
 
         public VoteCalc(List<Country> countries) => Countries = countries;
     }
