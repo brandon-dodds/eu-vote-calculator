@@ -19,6 +19,7 @@ namespace eu_vote_calculator
                 yesVotes = from countries in Countries
                            where countries.VoteChoice == 0
                            select countries;
+
                 participationVotes = from countries in Countries
                            where countries.VoteChoice == 3
                            select countries;
@@ -57,34 +58,9 @@ namespace eu_vote_calculator
             return false;
         }
 
-        public bool ReinforcedQualifiedMajority()
-        {
-            if (Math.Round((double)yesVotes.Count() / (Countries.Count() - participationVotes.Count()),2) >= 0.65)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public bool SimpleMajority()
-        {
-            if (yesVotes.Count() >= 0.5*(Countries.Count - participationVotes.Count()))
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public bool Unanimity()
-        {
-            if (yesVotes.Count() == Countries.Count -  participationVotes.Count())
-            {
-                return true;
-            }
-            return false;
-        }
-
-
+        public bool ReinforcedQualifiedMajority() => (Math.Round((double)yesVotes.Count() / (Countries.Count() - participationVotes.Count()), 2) >= 0.65) ? true : false;
+        public bool SimpleMajority() => (yesVotes.Count() >= 0.5 * (Countries.Count - participationVotes.Count())) ? true : false;
+        public bool Unanimity() => (yesVotes.Count() == Countries.Count - participationVotes.Count()) ? true : false;
         public VoteCalc(List<Country> countries) => Countries = countries;
     }
 }
