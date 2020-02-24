@@ -32,7 +32,7 @@ namespace eu_vote_calculator
             {
                 Console.Clear();
                 VoteCalc voteCalc = new VoteCalc(countryList);
-                Console.WriteLine($"EU Voting Calculator");
+                Console.WriteLine("EU Voting Calculator");
                 Console.WriteLine($"{voteCalc.AmountOfYesVotes()} Countries out of {voteCalc.Countries.Count} have voted yes.\n" +
                     $"{Math.Round(voteCalc.AmountOfYesPopulation(),0)}% Percent of the population voted yes.\n" + 
                     $"Has Qualified Majority passed?: {voteCalc.QualifiedMajority()}\n" +
