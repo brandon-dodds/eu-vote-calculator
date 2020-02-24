@@ -23,7 +23,6 @@ namespace eu_vote_calculator
                 participationVotes = from countries in Countries
                            where countries.VoteChoice == 3
                            select countries;
-
             }
         }
         /* This is an enum for the vote choice. This makes it a lot easier to manage if a country has abstained or not. And it is
@@ -58,9 +57,9 @@ namespace eu_vote_calculator
             return false;
         }
 
-        public bool ReinforcedQualifiedMajority() => (Math.Round((double)yesVotes.Count() / (Countries.Count() - participationVotes.Count()), 2) >= 0.65) ? true : false;
-        public bool SimpleMajority() => (yesVotes.Count() >= 0.5 * (Countries.Count - participationVotes.Count())) ? true : false;
-        public bool Unanimity() => (yesVotes.Count() == Countries.Count - participationVotes.Count()) ? true : false;
+        public bool ReinforcedQualifiedMajority() => Math.Round((double)yesVotes.Count() / (Countries.Count() - participationVotes.Count()), 2) >= 0.65;
+        public bool SimpleMajority() => yesVotes.Count() >= 0.5 * (Countries.Count - participationVotes.Count());
+        public bool Unanimity() => yesVotes.Count() == Countries.Count - participationVotes.Count();
         public VoteCalc(List<Country> countries) => Countries = countries;
     }
 }
