@@ -4,7 +4,7 @@ using System;
 
 namespace eu_vote_calculator
 {
-    /* This class takes in a list of countries and allows different actions to be done on said list in regards to votes. */
+    /* This class takes in a list of countries and allows different actions to be done */
 
     class VoteCalc
     {
@@ -25,16 +25,17 @@ namespace eu_vote_calculator
                            select countries;
             }
         }
-        /* This is an enum for the vote choice. This makes it a lot easier to manage if a country has abstained or not. And it is
-         * a lot easier to convert between the types. It also makes abstain the default option. */
 
+        /* Enumerator sets  the voting choice */
         public enum VoteChoice
         {
             Yes, Abstain, No, Participation
         }
 
+        /* This counts the amount of yes votes and returns an integer value */
         public int AmountOfYesVotes() => yesVotes.Count();
 
+        /* This counts the amount of yes votes based on the population and returns a double value */
         public double AmountOfYesPopulation()
         {
             double population = 0;
@@ -45,6 +46,7 @@ namespace eu_vote_calculator
             return population;
         }
 
+        /* This calculates the qualified majority and returns a boolean value */
         public bool QualifiedMajority()
         {
             double population = 0;
@@ -55,9 +57,15 @@ namespace eu_vote_calculator
             return yesVotes.Count() > 0.55 * Countries.Count && population > 65;
         }
 
+        /* This calculates the reinforced majority and returns a boolean value */
         public bool ReinforcedQualifiedMajority() => Math.Round((double)yesVotes.Count() / (Countries.Count() - participationVotes.Count()), 2) >= 0.65;
+
+        /* This calculates the simple majority and returns a boolean value */
         public bool SimpleMajority() => yesVotes.Count() >= 0.5 * (Countries.Count - participationVotes.Count());
+
+        /* This calculates the unanimity and returns a boolean value */
         public bool Unanimity() => yesVotes.Count() == Countries.Count - participationVotes.Count();
+
         public VoteCalc(List<Country> countries) => Countries = countries;
     }
 }

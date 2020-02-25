@@ -9,11 +9,10 @@ namespace eu_vote_calculator
         static void Main(string[] args)
         {
 
-            //All this does is creates a list of country objects from the file given.
-
             List<Country> countryList = new List<Country>();
             string[] textFile = File.ReadAllLines("CountryList.txt");
 
+            /* This retrieves the values from the text file by reading it line by line*/
             for (int i = 0; i < textFile.Length; i++)
             {
                 string[] splitText = textFile[i].Split(',');
@@ -30,6 +29,7 @@ namespace eu_vote_calculator
             }
             while (true)
             {
+                /* This displays the user with the information based on their voting choices */
                 Console.Clear();
                 VoteCalc voteCalc = new VoteCalc(countryList);
                 Console.WriteLine("EU Voting Calculator");
@@ -40,9 +40,12 @@ namespace eu_vote_calculator
                     $"Has Simple Majority?: {voteCalc.SimpleMajority()}\n"+
                     $"Has Reinforced Qualified Majority?: {voteCalc.ReinforcedQualifiedMajority()}\n" +
                     $"Please select a country");
+
+                /* This displays all the voting options to the user and the current voting choice */
                 for (int i = 0; i < voteCalc.Countries.Count; i++)
                     Console.WriteLine($"[{i}] {voteCalc.Countries[i].CountryName}: {(VoteCalc.VoteChoice)voteCalc.Countries[i].VoteChoice}");
 
+                /* Based on the users choice they can change the voting choice for that country*/
                 bool tryParseIntCountry = int.TryParse(Console.ReadLine(), out int intUserCountry);
                 if (tryParseIntCountry)
                 {
@@ -50,6 +53,8 @@ namespace eu_vote_calculator
                     Console.WriteLine($"Changing vote for {voteCalc.Countries[intUserCountry].CountryName}");
                     Console.WriteLine("Choose (Y)es, (N)o, (A)bstain or (P)articipation");
                     var userChoice = Console.ReadLine();
+
+                    /* The choice made by the user is then used to change the voting statitics by going to voting class */
                     switch (userChoice.Trim().ToLower())
                     {
                         case "y":
