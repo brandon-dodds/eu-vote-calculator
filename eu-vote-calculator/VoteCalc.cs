@@ -52,9 +52,7 @@ namespace eu_vote_calculator
             for (int i = 0; i < yesVotes.Count(); i++)
                 population += yesVotes.ElementAt(i).PopulationPercentage;
 
-            if(yesVotes.Count() > 0.55 * Countries.Count && population > 65)
-                return true;
-            return false;
+            return yesVotes.Count() > 0.55 * Countries.Count && population > 65;
         }
 
         public bool ReinforcedQualifiedMajority() => Math.Round((double)yesVotes.Count() / (Countries.Count() - participationVotes.Count()), 2) >= 0.65;
